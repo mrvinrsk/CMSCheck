@@ -83,7 +83,7 @@ def check_url(root_window, website):
     popup.title("CMS Check for " + website)
 
     popup_frame = tk.Frame(popup)
-    popup.geometry("+{}+{}".format(root.winfo_rootx() + 50, root.winfo_rooty() + 100))
+    popup.geometry("+{}+{}".format(root_window.winfo_rootx() + 50, root_window.winfo_rooty() + 100))
 
     popup_frame.pack(padx=40, pady=20)
 
