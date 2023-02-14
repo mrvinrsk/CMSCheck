@@ -29,10 +29,8 @@ def is_website_reachable(url):
     response = requests.head(url)
     if response.status_code == 200:
         return True
-    elif response.status_code == 404:
-        return False
     else:
-        response.raise_for_status()  # raise an exception for any other status code
+        return False
 
 
 def get_possible_cms(website):
@@ -56,7 +54,7 @@ def extra_thread(label_text, website):
         label_text.set("Prüfe " + website + " ...")
         return_value = get_possible_cms(website)
 
-        if len(return_value[0]) is not None:
+        if return_value[0] is not None:
             if len(return_value[1]) == 1:
                 label_text.set("Es handelt sich wahrscheinlich um " + "".join(return_value[1]) + ".")
             else:
@@ -73,7 +71,7 @@ def extra_thread(label_text, website):
 
 
 def check_url(root_window, website):
-    if not website.startswith("https://") or website.startswith("http://"):
+    if not website.startswith("https://") and not website.startswith("http://"):
         website = "https://" + website
 
     if not website.endswith("/"):
