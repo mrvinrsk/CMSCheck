@@ -72,7 +72,7 @@ def extra_thread(label_text, website):
         label_text.set("Der angegebene Text ist keine valide URL.")
 
 
-def check_url(website):
+def check_url(root_window, website):
     if not website.startswith("https://") or website.startswith("http://"):
         website = "https://" + website
 
@@ -80,8 +80,11 @@ def check_url(website):
         website = website + "/"
 
     popup = tk.Toplevel()
+    popup.title("CMS Check for " + website)
 
     popup_frame = tk.Frame(popup)
+    popup.geometry("+{}+{}".format(root.winfo_rootx() + 50, root.winfo_rooty() + 100))
+
     popup_frame.pack(padx=40, pady=20)
 
     label_text = tk.StringVar()
@@ -115,10 +118,10 @@ if __name__ == "__main__":
     frame.pack(padx=40, pady=20)
 
     url_input = tk.Entry(frame, width=40)
-    url_input.bind("<Return>", lambda event: check_url(url_input.get()))
+    url_input.bind("<Return>", lambda event: check_url(root, url_input.get()))
     url_input.pack()
 
-    button = tk.Button(frame, text="Prüfen", command=lambda: check_url(url_input.get()))
+    button = tk.Button(frame, text="Prüfen", command=lambda: check_url(root, url_input.get()))
     button.pack()
 
     root.mainloop()
