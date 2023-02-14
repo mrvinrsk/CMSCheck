@@ -1,0 +1,12 @@
+Metadata-Version: 2.1
+Name: cmscheck
+Version: 1.0
+Summary: Prüfe, ob und welches CMS auf einer Website installiert ist.
+Home-page: UNKNOWN
+Author: Marvin Roßkothen
+License: UNKNOWN
+Platform: UNKNOWN
+Requires: requests
+
+UNKNOWN
+
