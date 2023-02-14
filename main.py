@@ -1,9 +1,12 @@
-import concurrent.futures
 import threading
 
 import requests
 from urllib.parse import urlparse
 import tkinter as tk
+
+__program__ = 'CMS Check'
+__author__ = 'Marvin Roßkothen'
+__version__ = '1.0.0'  # do not change
 
 cms_list = {
     "Wordpress": ["wp-login.php", "wp-admin"],
@@ -13,7 +16,8 @@ cms_list = {
     "Joomla": ["administrator"],
     "Magento": ["admin", "admin/dashboard"],
     "PrestaShop": ["admin123"],
-    "Shopify": ["admin", "admin/auth/login"]
+    "Shopify": ["admin", "admin/auth/login"],
+    "CoastCMS": ["cms.php"]
 }
 
 
