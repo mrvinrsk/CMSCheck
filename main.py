@@ -59,7 +59,7 @@ def extra_thread(label_text, website):
         label_text.set("Prüfe " + website + " ...")
         return_value = get_possible_cms(website)
 
-        if return_value[0] is not None:
+        if len(return_value[0]) != 0:
             if len(return_value[1]) == 1:
                 label_text.set("Es handelt sich wahrscheinlich um " + "".join(return_value[1]) + ".")
             else:
