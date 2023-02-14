@@ -17,7 +17,8 @@ cms_list = {
     "Magento": ["admin", "admin/dashboard"],
     "PrestaShop": ["admin123"],
     "Shopify": ["admin", "admin/auth/login"],
-    "CoastCMS": ["cms.php"]
+    "CoastCMS": ["cms.php"],
+    "Anderes": ["dashboard/login.php"]
 }
 
 
@@ -38,7 +39,7 @@ def is_website_reachable(url):
 
 
 def get_possible_cms(website):
-    found_path = None
+    found_path = []
     possible_cms = []
     for cms, paths in cms_list.items():
         for path in paths:
@@ -46,7 +47,7 @@ def get_possible_cms(website):
             reachable = is_website_reachable(c_url)
 
             if reachable:
-                found_path = c_url
+                found_path.append(c_url)
                 possible_cms.append(cms)
                 break
 
@@ -62,10 +63,15 @@ def extra_thread(label_text, website):
             if len(return_value[1]) == 1:
                 label_text.set("Es handelt sich wahrscheinlich um " + "".join(return_value[1]) + ".")
             else:
-                label_text.set(
-                    "Es wurden mehrere mögliche CMS-Systeme gefunden werden: " + ", ".join(
-                        return_value[1]) + "\nBitte prüfe die URL " + return_value[
-                        0] + ". Meistens lässt sich auf der Seite ein Schriftzug finden, welcher offenbart, um welches CMS es sich handelt.")
+                if not len(return_value[1]) >= len(cms_list.keys()) / 2:
+                    label_text.set(
+                        "Es wurden mehrere mögliche CMS-Systeme gefunden werden: " + ", ".join(
+                            return_value[1]) + "\nBitte prüfe folgende URL(s):\n" + "\n".join(return_value[
+                                                                                                  0]) + "\n\nMeistens lässt sich auf der Seite ein Schriftzug finden, welcher offenbart, um welches CMS es sich handelt.")
+                else:
+                    label_text.set(
+                        "Es kann sein, dass ein CMS installiert ist, allerdings konnte dieses leider nicht genau ermittelt werden.\nBitte prüfe diese URLs von möglichen festgestellten CMS-Systemen und finde manuell heraus, um welches es sich handelt:\n" + "\n".join(
+                            return_value[0]))
 
         else:
             label_text.set("Es konnte kein CMS ermittelt werden.")
