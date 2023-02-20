@@ -195,6 +195,8 @@ def check_url(root_window, website):
     if not website.endswith("/"):
         website = website + "/"
 
+    website = website.strip()
+
     popup = tk.Toplevel()
     popup.title("CMS Check for " + website)
 
